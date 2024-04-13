@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const { getConnection } = require('./db');
 
+console.log(process.env.MYSQL_USER);
+
 async function main() {
     let connection;
 
