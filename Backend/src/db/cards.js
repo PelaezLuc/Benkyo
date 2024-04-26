@@ -29,7 +29,7 @@ const getCardsByLanguageAndLevel = async (language, level) => {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `SELECT card.id, card.question, card.answer, card.true_answer, card.false_answer FROM card INNER JOIN language ON card.language_id = language.id INNER JOIN level ON card.id_level = 
+            `SELECT card.id, card.question, card.answer, card.true_answer, card.false_answer FROM card INNER JOIN language ON card.id_language = language.id INNER JOIN level ON card.id_level = 
             level.id WHERE language.name = ? AND level.name = ?;`,
             [language, level]
         );
@@ -259,5 +259,7 @@ const getCorrectCards = async (id) => {
 };
 
 module.exports = {
+
     getCardById, getCardsByLanguage, getCardsByLanguageAndLevel, getUserCard, putCorrect, putFail, putFavourite, deleteFavourite, getFailCards, getFavouriteCards, getCorrectCards,
 }
+
