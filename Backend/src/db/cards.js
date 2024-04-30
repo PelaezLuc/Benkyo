@@ -29,7 +29,7 @@ const getCards = async (language, level) => {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `SELECT * FROM card INNER JOIN language ON card.id_language = language.id INNER JOIN level ON card.id_level = 
+            `SELECT card.id, card.question, card.answer, card.true_answer, card.false_answer FROM card INNER JOIN language ON card.id_language = language.id INNER JOIN level ON card.id_level = 
             level.id WHERE language.name = ? AND level.name = ?;`,
             [language, level]
         );
