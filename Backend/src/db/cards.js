@@ -22,14 +22,14 @@ const getCardById = async (id) => {
     }
 };
 
-const getCards = async (language, level) => {
+const getCardsByLanguageAndLevel = async (language, level) => {
     let connection;
 
     try {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `SELECT card.id, card.question, card.answer, card.true_answer, card.false_answer FROM card INNER JOIN language ON card.id_language = language.id INNER JOIN level ON card.id_level = 
+            `SELECT card.id, card.question, card.answer, card.true_answer, card.false_answer FROM card INNER JOIN language ON card.language_id = language.id INNER JOIN level ON card.id_level = 
             level.id WHERE language.name = ? AND level.name = ?;`,
             [language, level]
         );
@@ -44,6 +44,28 @@ const getCards = async (language, level) => {
         if (connection) connection.release();
     }
 };
+
+const getCardsByLanguage = async (language) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const [result] = await connection.query(
+            `SELECT card.id, card.level_id, card.question, card.answer, card.true_answer, card.false_answer FROM card 
+            INNER JOIN language ON card.language_id = language.id WHERE language.name = ?;`,
+            [language]
+        );
+
+        if(result.length === 0) {
+            throw generateError(`No existen tarjetas con ese lenguaje y ese nivel`);
+        }
+      
+        return result;
+    } finally {
+        if (connection) connection.release();
+    }  
+}
 
 const getUserCard = async (id) => {
     let connection;
@@ -237,14 +259,5 @@ const getCorrectCards = async (id) => {
 };
 
 module.exports = {
-    getCardById,
-    getCards,
-    getUserCard,
-    putCorrect,
-    putFail,
-    putFavourite,
-    deleteFavourite,
-    getFailCards,
-    getFavouriteCards,
-    getCorrectCards,
-};
+    getCardById, getCardsByLanguage, getCardsByLanguageAndLevel, getUserCard, putCorrect, putFail, putFavourite, deleteFavourite, getFailCards, getFavouriteCards, getCorrectCards,
+}

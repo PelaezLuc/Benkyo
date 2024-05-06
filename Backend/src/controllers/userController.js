@@ -210,6 +210,7 @@ const loginController = async (req, res, next) => {
             status: 'ok',
             message: 'Sesión iniciada con éxito',
             authToken: token,
+            data: tokenInfo
         });
     } catch (error) {
         next(error);

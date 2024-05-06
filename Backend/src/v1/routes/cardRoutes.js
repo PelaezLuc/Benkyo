@@ -5,7 +5,8 @@ const { userAuth } = require('../../../middlewares/userAuth');
 
 router
     .get('/:id', cardController.getCardByIdController)
-    .post('/level/language', cardController.getCardsByLangAndLevel)
+    .post('/language', cardController.getCardsByLanguageController)
+    .post('/level/language', cardController.getCardsByLanguageAndLevelController)
     .get('/user_card/:id', cardController.getUserCardController)
     .put('/correct/:idUser/:idCard', userAuth, cardController.setCorrectCard)
     .put('/fail/:idUser/:idCard', userAuth, cardController.setFailCard)
