@@ -1,4 +1,4 @@
-const { getCardById, getCards, getUserCard, putCorrect, putFail, 
+const { getCardById, getCardsByLanguage , getCardsByLanguageAndLevel, getUserCard, putCorrect, putFail, 
 putFavourite, deleteFavourite, getFailCards, getFavouriteCards, getCorrectCards } = require('../db/cards');
 
 const getCardByIdController = async (req, res, next) => {
@@ -18,12 +18,27 @@ const getCardByIdController = async (req, res, next) => {
     }
 };
 
-const getCardsByLangAndLevel = async (req, res, next) => {
+const getCardsByLanguageController = async (req, res, next) => {
+    try {
+        const { language } = req.body;
+
+        const cards = await getCardsByLanguage(language);
+
+        res.send({
+            status: 'ok',
+            data: cards
+        });
+    } catch(error) {
+        next(error);
+    }   
+}
+
+const getCardsByLanguageAndLevelController = async (req, res, next) => {
     try {
         const { language } = req.body;
         const { level } = req.body;
 
-        const cards = await getCards(language, level);
+        const cards = await getCardsByLanguageAndLevel(language, level);
 
         res.send({
             status: 'ok',
@@ -159,7 +174,8 @@ const getCorrectCardsByUserId = async (req, res, next) => {
 
 module.exports = {
     getCardByIdController, 
-    getCardsByLangAndLevel, 
+    getCardsByLanguageController,
+    getCardsByLanguageAndLevelController, 
     getUserCardController,
     setCorrectCard, 
     setFailCard,
