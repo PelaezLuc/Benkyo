@@ -1,16 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@500&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
         sans-serif;
 }
 
 body {
     background: #222;
+}
+
+header {
+    height: 16vh;
+    color: white;
+    width: 100vw;
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+nav {
+    height: 100%;
 }
 
 main {
@@ -19,6 +31,82 @@ main {
     display: flex;
     padding-right: 10vw;
     padding-left: 10vw;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+#nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    list-style: none;
+    font-size: larger;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-list-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.language-search-input {
+    border: none;
+    background: #ffffff08;
+}
+
+.language-search-input:focus {
+    outline-style: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info-avatar {
+    background-color: darkgray;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1000px;
+}
+
+.game-level {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+
+.game-level-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: small;
+}
+
+.game-level-img {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 1000px;
 }
 
 #benkyo-game {
@@ -35,7 +123,7 @@ main {
 }
 
 #benkyo-game p {
-    font-family: "M PLUS 1 Code", monospace;
+    font-family: 'M PLUS 1 Code', monospace;
     font-weight: 500;
     font-size: large;
 }
@@ -77,6 +165,46 @@ main {
     width: fit-content;
     list-style: none;
     border-left: 1px solid #00000033;
+}
+
+.game-button {
+    align-self: center;
+    background-color: whitesmoke;
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    font-size: 1rem;
+    line-height: 23px;
+    outline: none;
+    padding: 0.75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.game-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+}
+
+.game-button:focus {
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }
 
 @media screen and (min-width: 1024px) {

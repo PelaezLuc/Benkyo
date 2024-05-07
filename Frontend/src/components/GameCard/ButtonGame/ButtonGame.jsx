@@ -1,9 +1,9 @@
-import "./ButtonGame.css";
+import './ButtonGame.css';
 
-export function Button({ text, onClick }) {
+export function Button({ text, onClick, icon }) {
     return (
         <button className="game-button" onClick={onClick}>
-            {text}
+            {text} {icon}
         </button>
     );
 }
