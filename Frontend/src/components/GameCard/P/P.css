@@ -1,0 +1,8 @@
+p {
+    text-wrap: pretty;
+    margin: auto;
+    padding: 1rem;
+    font-family: 'M PLUS 1 Code', monospace;
+    font-weight: 500;
+    font-size: large;
+}

@@ -1,0 +1,12 @@
+.GameCardHeader {
+    height: 10vh;
+    width: auto;
+    background: #ffe008;
+    background: #ffe0089e;
+    font-size: xx-large;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}

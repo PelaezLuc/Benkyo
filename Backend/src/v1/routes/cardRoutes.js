@@ -10,11 +10,14 @@ router
     .get('/user_card/:id', cardController.getUserCardController)
     .put('/correct/:idUser/:idCard', userAuth, cardController.setCorrectCard)
     .put('/fail/:idUser/:idCard', userAuth, cardController.setFailCard)
-    .put('/favourite/:idUser/id:Card', userAuth, cardController.setFavouriteCard)
+    .put(
+        '/favourite/:idUser/id:Card',
+        userAuth,
+        cardController.setFavouriteCard
+    )
     .put('/delete_favourite/:id', userAuth, cardController.deleteFavouriteCard)
     .get('/fails/:id', cardController.getFailCardsByUserId)
     .get('/favourites/:id', cardController.getFavouriteCardsByUserId)
     .get('/correct/:id', cardController.getCorrectCardsByUserId);
 
-
-    module.exports = router;
+module.exports = router;

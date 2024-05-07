@@ -12,15 +12,15 @@ const getCardById = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
+        if (result.length === 0) {
             throw generateError(`Card con id ${id} no encontrada`);
         }
 
-        return result[0]
+        return result[0];
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const getCardsByLanguageAndLevel = async (language, level) => {
     let connection;
@@ -34,6 +34,29 @@ const getCardsByLanguageAndLevel = async (language, level) => {
             [language, level]
         );
 
+        if (result.length === 0) {
+            throw generateError(
+                `No existen tarjetas con ese lenguaje y ese nivel`
+            );
+        }
+        return result;
+    } finally {
+        if (connection) connection.release();
+    }
+};
+
+const getCardsByLanguage = async (language) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const [result] = await connection.query(
+            `SELECT card.id, card.level_id, card.question, card.answer, card.true_answer, card.false_answer FROM card 
+            INNER JOIN language ON card.language_id = language.id WHERE language.name = ?;`,
+            [language]
+        );
+
         if(result.length === 0) {
             throw generateError(`No existen tarjetas con ese lenguaje y ese nivel`);
         }
@@ -41,7 +64,7 @@ const getCardsByLanguageAndLevel = async (language, level) => {
         return result;
     } finally {
         if (connection) connection.release();
-    }
+    }  
 }
 
 const getCardsByLanguage = async (language) => {
@@ -77,17 +100,18 @@ const getUserCard = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`El usuario no ha respondido la tarjeta correctamente`);
+        if (result.length === 0) {
+            throw generateError(
+                `El usuario no ha respondido la tarjeta correctamente`
+            );
         }
-    
+
         return result;
     } catch (error) {
-        
-    }finally {
+    } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const putCorrect = async (idUser, idCard) => {
     let connection;
@@ -106,18 +130,19 @@ const putCorrect = async (idUser, idCard) => {
             [idUser, idCard]
         );
 
-        if(result.length === 0) {
-            throw generateError(`El usuario no ha respondido la tarjeta correctamente`);
+        if (result.length === 0) {
+            throw generateError(
+                `El usuario no ha respondido la tarjeta correctamente`
+            );
         }
-    
+
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const putFail = async (id) => {
-    
     let connection;
 
     try {
@@ -128,15 +153,17 @@ const putFail = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`El usuario ha respondido la tarjeta correctamente`);
+        if (result.length === 0) {
+            throw generateError(
+                `El usuario ha respondido la tarjeta correctamente`
+            );
         }
-    
+
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const putFavourite = async (id) => {
     let connection;
@@ -149,15 +176,17 @@ const putFavourite = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`El usuario no ha añadido la tarjeta a favoritos correctamente`);
+        if (result.length === 0) {
+            throw generateError(
+                `El usuario no ha añadido la tarjeta a favoritos correctamente`
+            );
         }
-    
+
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const deleteFavourite = async (id) => {
     let connection;
@@ -170,15 +199,17 @@ const deleteFavourite = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`El usuario no ha eliminado la tarjeta a favoritos correctamente`);
+        if (result.length === 0) {
+            throw generateError(
+                `El usuario no ha eliminado la tarjeta a favoritos correctamente`
+            );
         }
-    
+
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const getFailCards = async (id) => {
     let connection;
@@ -191,15 +222,17 @@ const getFailCards = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`No existen tarjetas fallidas para este usuario`);
+        if (result.length === 0) {
+            throw generateError(
+                `No existen tarjetas fallidas para este usuario`
+            );
         }
-        
+
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const getFavouriteCards = async (id) => {
     let connection;
@@ -212,15 +245,17 @@ const getFavouriteCards = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`No existen tarjetas favoritas para este usuario`);
+        if (result.length === 0) {
+            throw generateError(
+                `No existen tarjetas favoritas para este usuario`
+            );
         }
 
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 const getCorrectCards = async (id) => {
     let connection;
@@ -233,15 +268,17 @@ const getCorrectCards = async (id) => {
             [id]
         );
 
-        if(result.length === 0) {
-            throw generateError(`No existen tarjetas correctas para este usuario`);
+        if (result.length === 0) {
+            throw generateError(
+                `No existen tarjetas correctas para este usuario`
+            );
         }
 
         return result;
     } finally {
         if (connection) connection.release();
     }
-}
+};
 
 module.exports = {
     getCardById, getCardsByLanguage, getCardsByLanguageAndLevel, getUserCard, putCorrect, putFail, putFavourite, deleteFavourite, getFailCards, getFavouriteCards, getCorrectCards,
