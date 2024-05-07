@@ -67,6 +67,28 @@ const getCardsByLanguage = async (language) => {
     }  
 }
 
+const getCardsByLanguage = async (language) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const [result] = await connection.query(
+            `SELECT card.id, card.level_id, card.question, card.answer, card.true_answer, card.false_answer FROM card 
+            INNER JOIN language ON card.language_id = language.id WHERE language.name = ?;`,
+            [language]
+        );
+
+        if(result.length === 0) {
+            throw generateError(`No existen tarjetas con ese lenguaje y ese nivel`);
+        }
+      
+        return result;
+    } finally {
+        if (connection) connection.release();
+    }  
+}
+
 const getUserCard = async (id) => {
     let connection;
 
