@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json()); //Parsea los json recogidos en el req.body
-app.use(morgan('dev')); //Registra el tipo de petición HTTP y la muestra por consola
+//app.use(morgan('dev')); Registra el tipo de petición HTTP y la muestra por consola
 app.use(fileUpload()); //Permite leer el body en formato form-data
 app.use(cors());
 

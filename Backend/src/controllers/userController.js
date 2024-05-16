@@ -42,6 +42,34 @@ const newUserController = async (req, res, next) => {
     }
 };
 
+const getMeController = async (req, res, next) => {
+    console.log(req);
+    let connection;
+
+    try {
+        connection = await getConnection();
+        const { id } = req.userAuth;
+
+        const [result] = await connection.query(
+            `
+      SELECT id, email, created_at FROM users WHERE id = ?
+    `,
+            [id]
+        );
+
+        if (result.length === 0) {
+            throw generateError('No hay ningún usuario con esa id', 404);
+        }
+
+        res.send({
+            status: 'ok',
+            data: user,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const getUserController = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -210,7 +238,7 @@ const loginController = async (req, res, next) => {
             status: 'ok',
             message: 'Sesión iniciada con éxito',
             authToken: token,
-            data: tokenInfo
+            data: tokenInfo,
         });
     } catch (error) {
         next(error);
@@ -312,6 +340,7 @@ const editAvatarController = async (req, res, next) => {
 
 module.exports = {
     newUserController,
+    getMeController,
     getUserController,
     loginController,
     editUserController,

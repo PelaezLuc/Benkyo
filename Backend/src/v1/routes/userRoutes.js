@@ -6,6 +6,7 @@ const { userAuth } = require('../../../middlewares/userAuth');
 router
     .post('/register', userController.newUserController)
     .get('/:id', userController.getUserController)
+    .get('/user', userAuth, userController.getMeController)
     .post('/login', userController.loginController)
     .put('/edit', userAuth, userController.editUserController)
     .put('/editInfo', userAuth, userController.editUserInfoController)

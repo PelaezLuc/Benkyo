@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { P } from './P/P';
 import './GameCard.css';
+
 import { Button } from './ButtonGame/ButtonGame';
 import { Header } from './GameCardHeader/GameCardHeader';
 import { getAllCards } from '../../utils/services';
@@ -88,7 +89,6 @@ export function GameCard() {
                             <section className="answer-section">
                                 {card?.respuestas.map((respuesta, index) => (
                                     <div key={index} className="border">
-                                        {' '}
                                         <section className="answer-item">
                                             <P text={respuesta.texto}></P>
                                             <Button
