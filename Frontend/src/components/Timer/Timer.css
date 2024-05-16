@@ -11,7 +11,7 @@
     box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
     box-sizing: border-box;
     color: #41403e;
-    cursor: pointer;
+
     display: inline-block;
     font-family: Neucha, sans-serif;
     font-size: 1rem;
@@ -26,5 +26,4 @@
     border-top-right-radius: 15px 225px;
     user-select: none;
     -webkit-user-select: none;
-    touch-action: manipulation;
 }

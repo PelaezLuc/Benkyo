@@ -8,6 +8,7 @@ import { getAllCards } from '../../utils/services';
 import { GrLinkNext } from 'react-icons/gr';
 import confetti from 'canvas-confetti';
 import { Modal } from './ModalGame/Modal';
+import { Timer } from '../Timer/Timer';
 
 export function GameCard() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -15,6 +16,9 @@ export function GameCard() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [card, setCard] = useState();
     const [cards, setCards] = useState([]);
+
+    const [remainingTimer, setRemainingTimer] = useState(10);
+
     const [point, setPoint] = useState(0);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
@@ -72,8 +76,21 @@ export function GameCard() {
         }
     };
     const handleNextClick = () => {
+        setModalVisible(false);
         setIsFlipped(!isFlipped);
         setCurrentCardIndex(currentCardIndex + 1);
+        resetTimer();
+    };
+
+    const timeOver = () => {
+        setIsFlipped(!isFlipped);
+        setModalMessage('Se te acabo el tiempo!! ⏱️');
+        setModalVisible(true);
+        setTimeout(() => setModalVisible(false), 3000);
+    };
+
+    const resetTimer = () => {
+        setRemainingTimer(10);
     };
 
     return (
@@ -85,6 +102,11 @@ export function GameCard() {
                         <section className="front">
                             <section className="question-section">
                                 <P text={card?.question}></P>
+                                <Timer
+                                    timeOver={timeOver}
+                                    remainingTimer={remainingTimer}
+                                    setRemainingTimer={setRemainingTimer}
+                                />
                             </section>
                             <section className="answer-section">
                                 {card?.respuestas.map((respuesta, index) => (

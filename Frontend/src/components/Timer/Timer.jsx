@@ -1,24 +1,24 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useEffect } from 'react';
 import './Timer.css';
 
-export function Timer() {
-    const [remainingTimer, setRemainingTimer] = useState(10);
-
+export function Timer({ timeOver, remainingTimer, setRemainingTimer }) {
     useEffect(() => {
-        const timerInterval = setInterval(() => {
+        let timerInterval = setInterval(() => {
             if (remainingTimer <= 0) {
                 clearInterval(timerInterval);
-                // Aquí puedes realizar cualquier acción cuando el tiempo se agote
+
                 console.log('¡Tiempo agotado!');
+                timeOver();
+                setRemainingTimer(10);
             } else {
-                setRemainingTimer((prevTime) => prevTime - 1);
+                console.log(remainingTimer);
+                setRemainingTimer((prevTime) => prevTime - 1); // Asegura que uses el valor más reciente
             }
         }, 1000);
 
-        // Limpiar el intervalo cuando el componente se desmonte
         return () => clearInterval(timerInterval);
-    }, [remainingTimer]);
-
+    }, [remainingTimer, timeOver, setRemainingTimer]);
     return (
         <>
             <div className="timer">
