@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react';
 import './GameHeader.css';
 import defaultAvatar from '../../public/img/default-avatar.jpg';
-import dificil from '../../public/img/dificil.png';
-import facil from '../../public/img/facil.png';
-import intermedio from '../../public/img/intermedio.png';
+import juniorCat from '../../public/img/junior-cat.png';
+import middleCat from '../../public/img/middle-cat.png';
+import seniorCat from '../../public/img/senior-cat.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -34,7 +34,7 @@ export function GameHeader() {
 
     return (
         <>
-            <header className="GameHeader">
+            <header className="game-header">
                 <nav>
                     <ul id="nav-list">
                         <li className="nav-list-item user-info">
@@ -66,7 +66,7 @@ export function GameHeader() {
                                                 ? 'selected'
                                                 : ''
                                         }`}
-                                        src={facil}
+                                        src={juniorCat}
                                         alt=""
                                         onClick={() =>
                                             handleLevelSelect('easy')
@@ -83,7 +83,7 @@ export function GameHeader() {
                                                 ? 'selected'
                                                 : ''
                                         }`}
-                                        src={intermedio}
+                                        src={middleCat}
                                         alt=""
                                         onClick={() =>
                                             handleLevelSelect('intermidate')
@@ -98,7 +98,7 @@ export function GameHeader() {
                                                 ? 'selected'
                                                 : ''
                                         }`}
-                                        src={dificil}
+                                        src={seniorCat}
                                         alt=""
                                         onClick={() =>
                                             handleLevelSelect('difficult')

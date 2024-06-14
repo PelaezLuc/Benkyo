@@ -1,4 +1,4 @@
-.GameCardHeader {
+.game-card-header {
     height: 10vh;
     width: auto;
     background: #ffe008;
@@ -9,4 +9,14 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+h1 {
+    font-size: smaller !important;
+}
+
+.game-card-header strong {
+    text-transform: uppercase;
 }
