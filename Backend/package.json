@@ -14,12 +14,13 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "name": "benkyo-api",
   "description": "Consiste en un juego en el que se presentan tarjetas\r por nivel y lenguaje de programación que contienen preguntas\r con una respuesta correcta y otra incorrecta.",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "directories": {
     "doc": "doc"
   },
@@ -33,4 +34,4 @@
     "url": "https://github.com/PelaezLuc/Benkyo/issues"
   },
   "homepage": "https://github.com/PelaezLuc/Benkyo#readme"
-
+}

@@ -1,1 +1,0 @@
-INSERT INTO language (name) values ('JavaScript');

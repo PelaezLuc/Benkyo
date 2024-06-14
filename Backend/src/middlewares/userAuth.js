@@ -1,6 +1,6 @@
-const { getConnection } = require('../src/db/db');
+const { getConnection } = require('../../v1/database/getConnection');
+const { generateError } = require('../helpers/generateError');
 const jwt = require('jsonwebtoken');
-const { generateError } = require('../src/helpers/generateError');
 require('dotenv').config();
 
 const userAuth = async (req, res, next) => {
@@ -8,7 +8,7 @@ const userAuth = async (req, res, next) => {
 
   try {
     connection = await getConnection();
-    
+
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -16,11 +16,11 @@ const userAuth = async (req, res, next) => {
     }
 
     let tokenInfo;
-   
+
     try {
       tokenInfo = jwt.verify(authorization, process.env.SECRET);
     } catch {
-      throw generateError('El token no es válido', 401);
+      throw generateError('Unvalid Token', 401);
     }
 
     const [user] = await connection.query(
@@ -29,7 +29,7 @@ const userAuth = async (req, res, next) => {
     );
 
     if (user.length < 1) {
-        throw generateError('El token no es válido', 401); // Unauthorized
+      throw generateError('Unvalid Token', 401); // Unauthorized
     }
 
     req.userAuth = tokenInfo;
@@ -44,5 +44,5 @@ const userAuth = async (req, res, next) => {
 };
 
 module.exports = {
-    userAuth,
+  userAuth,
 };
