@@ -29,7 +29,7 @@ const userAuth = async (req, res, next) => {
     );
 
     if (user.length < 1) {
-      throw generateError('Unvalid Token', 401); // Unauthorized
+      throw generateError('Unvalid Token', 401);
     }
 
     req.userAuth = tokenInfo;
