@@ -1,6 +1,5 @@
 const { getConnection } = require('./getConnection');
 const { generateError } = require('../../src/helpers/generateError');
-const { get, use } = require('../routes/userRoutes');
 
 const createNewUser = async ({ name, username, stack, email }, passwordHash) => {
     let connection;
@@ -201,8 +200,8 @@ const updateUserEmail = async (userAuthId, newEmail) => {
             `,
             [newEmail, userAuthId]
         );
-    } catch (error) {
-        throw generateError(error);
+    } finally {
+        if (connection) connection.release();
     }
 }
 
@@ -230,8 +229,6 @@ const getAvatarFilename = async (userAuthId) => {
 const updateUserAvatar = async (userAuthId, uniqueFileName) => {
     let connection;
 
-    console.log(uniqueFileName);
-
     try {
         connection = await getConnection();
 
@@ -241,8 +238,61 @@ const updateUserAvatar = async (userAuthId, uniqueFileName) => {
             `,
             [uniqueFileName, userAuthId]
         );
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
+const updateUserPassword = async (userAuthId, newPasswordHash) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        await connection.query(
+            `
+                UPDATE user SET password = ? WHERE id = ?
+            `,
+            [newPasswordHash, userAuthId]
+        );
     } catch (error) {
-        throw generateError(error);
+        throw generateError('Error actualizando la contraseña del usuario', 500);
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
+const deleteUserAvatar = async (userAuthId) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        await connection.query(
+            `
+                UPDATE user SET avatar = NULL WHERE id = ?
+            `,
+            [userAuthId]
+        )
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
+const deleteUser = async (userAuthId) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        await connection.query(
+            `
+                DELETE FROM user WHERE id = ?
+            `,
+            [userAuthId]
+        );
+    } finally {
+        if (connection) connection.release();
     }
 }
 
@@ -255,6 +305,9 @@ module.exports = {
     updateUserStack,
     updateUserEmail,
     getAvatarFilename,
-    updateUserAvatar
+    updateUserAvatar,
+    updateUserPassword,
+    deleteUserAvatar,
+    deleteUser
 }
 

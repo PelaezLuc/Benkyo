@@ -11,6 +11,9 @@ router
     .put('/edit-username', userAuth, userController.updateUsernameController)
     .put('/edit-stack', userAuth, userController.updateUserStackController)
     .put('/edit-email', userAuth, userController.updateUserEmailController)
-    .put('/edit-user-avatar', userAuth, userController.updateUserAvatarController);
+    .put('/edit-user-avatar', userAuth, userController.updateUserAvatarController)
+    .put('/edit-password', userAuth, userController.updateUserPasswordController)
+    .delete('/delete-user-avatar', userAuth, userController.deleteUserAvatarController)
+    .delete('/delete-user', userAuth, userController.deleteUserController);
 
 module.exports = router;

@@ -24,9 +24,26 @@ const newEmailSchema = Joi.string()
     .lowercase()
     .error(new Error('El email introducido no es correcto'));
 
+const newPasswordSchema = Joi.string()
+    .required()
+    .min(8)
+    .max(30)
+    .regex(/[A-Za-z\d@$!%*?&]/)
+    .error((errors) => {
+        if (
+            errors[0].code === 'any.required' ||
+            errors[0].code === 'string.empty'
+        ) {
+            return new Error('La contraseña es requerida');
+        } else {
+            return new Error('La contraseña debe contener al menos una letra mayúscula, otra minúscula, un número, un caracter especial, y una longitud entre 8 y 30 caracteres');
+        }
+    });
+
 module.exports = {
     newNameSchema,
     newStacknSchema,
     newUsernameSchema,
-    newEmailSchema
+    newEmailSchema,
+    newPasswordSchema
 };

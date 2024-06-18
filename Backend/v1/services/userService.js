@@ -52,7 +52,7 @@ const loginUser = async (userData) => {
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword) {
-            throw generateError('Email o contraseña incorrectos', 401);
+            throw generateError('Email o contraseña incorrectos', 400);
         }
 
         const tokenInfo = { id: user.id };
@@ -181,6 +181,106 @@ const updateUserAvatar = async (userAuthId, userAvatar) => {
     }
 }
 
+const updateUserPassword = async (userAuthId, userNewData) => {
+    try {
+        const { currentPassword, newPassword } = userNewData;
+
+        if (!userAuthId) {
+            throw generateError('Header Authorization Missing', 400);
+        }
+
+        if (!currentPassword) {
+            throw generateError('Debes indicar tu contraseña', 400);
+        }
+
+        if (!newPassword) {
+            throw generateError('Debes indicar la nueva contraseña', 400);
+        }
+
+        const user = await User.getUserById(userAuthId);
+
+        const validateOldPass = await bcrypt.compare(currentPassword, user.password);
+
+        const validateNewPass = await bcrypt.compare(newPassword, user.password);
+
+        if (!validateOldPass) {
+            throw generateError('La contraseña que has introducido no es correcta', 400);
+        }
+
+        if (validateNewPass) {
+            throw generateError('La nueva contraseña debe ser distinta', 400);
+        }
+
+        await validateSchema(editUserSchema.newPasswordSchema, newPassword);
+
+        const newPasswordHash = await bcrypt.hash(newPassword, 8)
+
+        await User.updateUserPassword(userAuthId, newPasswordHash);
+    } catch (error) {
+        throw generateError(error);
+    }
+}
+
+const deleteUser = async (userAuth, userData) => {
+    try {
+        const { password, confirmPassword } = userData;
+
+        if (!userAuth) {
+            throw generateError('Header Authorization Missing', 400);
+        }
+
+        if (password !== confirmPassword) {
+            throw generateError('Las contraseñas no coinciden', 400);
+        }
+
+        const user = await User.getUserById(userAuth);
+
+        console.log(`bodyPassword: ${password} dbPassword: ${user.password}`)
+
+        const validatePassword = await bcrypt.compare(password, user.password);
+
+        if (!validatePassword) {
+            throw generateError('Contraseña incorrecta');
+        }
+
+        const avatarFilename = user.avatar;
+
+        if (avatarFilename) {
+            const imagePath = path.join(__dirname, '..', '..', 'static', avatarFilename);
+            await unlink(imagePath);
+        }
+
+        await User.deleteUser(userAuth);
+    } catch (error) {
+        throw generateError(error);
+    }
+}
+
+const deleteUserAvatar = async (userAuthId) => {
+    try {
+        if (!userAuthId) {
+            throw generateError('Authorization header missing', 400);
+        }
+
+        const user = await User.getUserById(userAuthId);
+
+        const avatarFilename = user.avatar;
+
+        if (!avatarFilename) {
+            throw generateError('No hay ninguna imagen de usuario que eliminar', 400)
+        }
+
+        await User.deleteUserAvatar(userAuthId);
+
+        const imagePath = path.join(__dirname, '..', '..', 'static', avatarFilename);
+
+        await unlink(imagePath);
+    } catch (error) {
+        throw generateError(error)
+    }
+
+}
+
 module.exports = {
     createNewUser,
     getOneUser,
@@ -189,5 +289,8 @@ module.exports = {
     updateUsername,
     updateUserStack,
     updateUserEmail,
-    updateUserAvatar
+    updateUserAvatar,
+    updateUserPassword,
+    deleteUserAvatar,
+    deleteUser
 }

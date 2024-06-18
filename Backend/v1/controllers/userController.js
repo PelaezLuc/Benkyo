@@ -59,7 +59,7 @@ const updateUserNameController = async (req, res, next) => {
         res.send({
             status: "OK",
             message: `User id: ${userAuthId} name updated`
-        })
+        });
     } catch (error) {
         next(error)
     }
@@ -75,7 +75,7 @@ const updateUsernameController = async (req, res, next) => {
         res.send({
             status: "OK",
             message: `Username from user id: ${userAuthId} updated`
-        })
+        });
     } catch (error) {
         next(error);
     }
@@ -91,7 +91,7 @@ const updateUserStackController = async (req, res, next) => {
         res.send({
             status: "OK",
             message: `Stack from user id: ${userAuthId} updated`
-        })
+        });
     } catch (error) {
         next(error);
     }
@@ -107,7 +107,7 @@ const updateUserEmailController = async (req, res, next) => {
         res.send({
             status: 'OK',
             message: `Email from user id: ${userAuthId} updated`
-        })
+        });
     } catch (error) {
         next(error);
     }
@@ -130,6 +130,55 @@ const updateUserAvatarController = async (req, res, next) => {
     }
 }
 
+const updateUserPasswordController = async (req, res, next) => {
+    try {
+        const userAuthId = req.userAuth.id;
+
+        const userNewData = req.body;
+
+        await userService.updateUserPassword(userAuthId, userNewData);
+
+        res.send({
+            status: 'OK',
+            message: `Password for user id: ${userAuthId} updated`
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+const deleteUserController = async (req, res, next) => {
+    try {
+        const userAuthId = req.userAuth.id;
+
+        const userData = req.body;
+
+        await userService.deleteUser(userAuthId, userData);
+
+        res.send({
+            status: 'OK',
+            message: `User id: ${userAuthId} deleted`
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+const deleteUserAvatarController = async (req, res, next) => {
+    try {
+        const userAuthId = req.userAuth.id;
+
+        await userService.deleteUserAvatar(userAuthId);
+
+        res.send({
+            status: 'OK',
+            message: `Avatar from user id: ${userAuthId} deleted`
+        })
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     createNewUserController,
     getOneUserController,
@@ -138,5 +187,8 @@ module.exports = {
     updateUsernameController,
     updateUserStackController,
     updateUserEmailController,
-    updateUserAvatarController
+    updateUserAvatarController,
+    updateUserPasswordController,
+    deleteUserAvatarController,
+    deleteUserController
 };
