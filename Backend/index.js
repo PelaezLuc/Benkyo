@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const v1UserRouter = require('./v1/routes/userRoutes');
+const v1DeckRouter = require('./v1/routes/deckRoutes');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 
@@ -14,6 +15,7 @@ app.use(fileUpload()); //Permite leer el body en formato form-data
 app.use(cors());
 
 app.use('/api/v1/user', v1UserRouter);
+app.use('/api/v1/deck', v1DeckRouter);
 
 app.use((error, req, res, next) => {
     // Middleware de gestión de errores genéricos
