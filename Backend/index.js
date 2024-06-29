@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/api/v1/user', v1UserRouter);
 app.use('/api/v1/deck', v1DeckRouter);
-app.use('/api/v1/trophy',);
+// app.use('/api/v1/trophy',);
 
 app.use((error, req, res, next) => {
     // Middleware de gestión de errores genéricos
