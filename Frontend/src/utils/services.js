@@ -1,9 +1,9 @@
-export const getAllCards = async ({ level, language }) => {
+export const getPlayerDeck = async ({ language }) => {
+    console.log(language)
     const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_URL_RAIZ}/api/v1/card/level/language`,
+        `${import.meta.env.VITE_REACT_APP_ROOT_URL}deck/player/${language}`,
         {
             method: 'GET',
-            body: JSON.stringify({ level, language }),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -15,6 +15,8 @@ export const getAllCards = async ({ level, language }) => {
     if (!response.ok) {
         throw new Error(json.message);
     }
+
+    console.log(json.data);
 
     return json.data;
 };

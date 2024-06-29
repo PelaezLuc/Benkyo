@@ -5,7 +5,7 @@ export const AuthContext = createContext(null);
 export const AuthContextProviderComponent = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [user, setUser] = useState(null);
-    const [selectedLevels, setSelectedLevels] = useState(['easy']);
+    const [selectedDifficulty, setSelectedLevels] = useState(['junior']);
     const [selectedLanguage, setSelectedLanguage] = useState('JavaScript');
 
     useEffect(() => {
@@ -27,12 +27,12 @@ export const AuthContextProviderComponent = ({ children }) => {
     //     if (token) getUserData();
     // }, [token, setToken]);
 
-    const levelGame = (level) => {
-        setSelectedLevels(level);
+    const gameDifficulty = (difficulty) => {
+        setSelectedLevels(difficulty);
     };
 
-    const lenguage = (lenguage) => {
-        setSelectedLanguage(lenguage);
+    const gameLanguage = (language) => {
+        setSelectedLanguage(language);
     };
 
     const logout = () => {
@@ -51,8 +51,8 @@ export const AuthContextProviderComponent = ({ children }) => {
                 user,
                 login,
                 logout,
-                levelGame,
-                lenguage,
+                gameDifficulty,
+                gameLanguage,
             }}
         >
             {children}

@@ -8,27 +8,28 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 export function GameHeader() {
-    const [selectedLevels, setSelectedLevels] = useState(['easy']);
+    const [selectedDifficulty, setSelectedDifficulty] = useState(['junior']);
     const [selectedLanguage, setSelectedLanguage] = useState('JavaScript');
-    const { levelGame, lenguage } = useContext(AuthContext);
+    const { gameDifficulty, gameLanguage } = useContext(AuthContext);
 
-    const handleLevelSelect = (level) => {
-        const newSelectedLevels = selectedLevels.includes(level)
-            ? selectedLevels.filter((lvl) => lvl !== level)
-            : [...selectedLevels, level];
-        setSelectedLevels(newSelectedLevels);
-        levelGame(newSelectedLevels);
+    const handleLevelSelect = (difficulty) => {
+        const newSelectedDifficulty = selectedDifficulty.includes(difficulty)
+                                    ? selectedDifficulty.filter((lvl) => lvl !== difficulty)
+                                    : [...selectedDifficulty, difficulty];
+            
+        setSelectedDifficulty(newSelectedDifficulty);
+        gameDifficulty(newSelectedDifficulty);
 
         localStorage.setItem(
-            'selectedLevels',
-            JSON.stringify(newSelectedLevels)
+            'selectedDifficulty',
+            JSON.stringify(newSelectedDifficulty)
         );
     };
 
     const handleLanguageChange = (event) => {
         if (event.target.value !== '') {
             setSelectedLanguage(event.target.value);
-            lenguage(event.target.value);
+            gameLanguage(event.target.value);
         }
     };
 
@@ -54,7 +55,7 @@ export function GameHeader() {
                                 onChange={handleLanguageChange}
                             >
                                 <option value="JavaScript">JavaScript</option>
-                                <option value="casa">casa</option>
+                                <option value="casa">Java</option>
                             </select>
                         </li>
                         <li className="nav-list-item">
@@ -62,14 +63,14 @@ export function GameHeader() {
                                 <li className="game-level-item">
                                     <img
                                         className={`game-level-img ${
-                                            selectedLevels.includes('easy')
+                                            selectedDifficulty.includes('junior')
                                                 ? 'selected'
                                                 : ''
                                         }`}
                                         src={juniorCat}
                                         alt=""
                                         onClick={() =>
-                                            handleLevelSelect('easy')
+                                            handleLevelSelect('junior')
                                         }
                                     />
                                     <p>Junior</p>
@@ -77,8 +78,8 @@ export function GameHeader() {
                                 <li className="game-level-item">
                                     <img
                                         className={`game-level-img ${
-                                            selectedLevels.includes(
-                                                'intermidate'
+                                            selectedDifficulty.includes(
+                                                'middle'
                                             )
                                                 ? 'selected'
                                                 : ''
@@ -86,7 +87,7 @@ export function GameHeader() {
                                         src={middleCat}
                                         alt=""
                                         onClick={() =>
-                                            handleLevelSelect('intermidate')
+                                            handleLevelSelect('middle')
                                         }
                                     />
                                     <p>Middle</p>
@@ -94,14 +95,14 @@ export function GameHeader() {
                                 <li className="game-level-item">
                                     <img
                                         className={`game-level-img ${
-                                            selectedLevels.includes('difficult')
+                                            selectedDifficulty.includes('senior')
                                                 ? 'selected'
                                                 : ''
                                         }`}
                                         src={seniorCat}
                                         alt=""
                                         onClick={() =>
-                                            handleLevelSelect('difficult')
+                                            handleLevelSelect('senior')
                                         }
                                     />
                                     <p>Senior</p>

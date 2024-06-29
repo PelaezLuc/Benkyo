@@ -3,7 +3,7 @@ import { P } from './P/P';
 import './GameCard.css';
 import { Button } from './ButtonGame/ButtonGame';
 import { Header } from './GameCardHeader/GameCardHeader';
-import { getAllCards } from '../../utils/services';
+import { getPlayerDeck } from '../../utils/services';
 import { GrLinkNext } from 'react-icons/gr';
 import confetti from 'canvas-confetti';
 import { Modal } from './ModalGame/Modal';
@@ -14,20 +14,20 @@ export function GameCard() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [card, setCard] = useState();
     const [cards, setCards] = useState([]);
-    const [point, setPoint] = useState(0);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     useEffect(() => {
-        const fetchCards = async ({ level, language }) => {
+        const fetchCards = async ({ language }) => {
             try {
-                const data = await getAllCards({ level, language });
+                const data = await getPlayerDeck({ language });
                 const shuffledData = shuffleArray([...data]);
+                
                 setCards(shuffledData);
             } catch (error) {
                 console.log(error);
             }
         };
-        fetchCards({ level: 'junior', language: 'JavaScript' });
+        fetchCards({ language: 'javascript' });
     }, []);
 
     useEffect(() => {
@@ -43,8 +43,8 @@ export function GameCard() {
 
     const shuffleArray = (array) => {
         let currentIndex = array.length,
-            temporaryValue,
-            randomIndex;
+                                 temporaryValue,
+                                 randomIndex;
 
         while (0 !== currentIndex) {
             randomIndex = Math.floor(Math.random() * currentIndex);
@@ -78,7 +78,7 @@ export function GameCard() {
     return (
         <>
             <main>
-                <Header lenguaje="JavaScript"></Header>
+                <Header language="JavaScript"></Header>
                 <div className={`card ${isFlipped ? 'flipped' : ''}`}>
                     <div className="content">
                         <section className="front">
