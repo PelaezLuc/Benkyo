@@ -33,7 +33,6 @@ const getOneUserController = async (req, res, next) => {
 const loginUserController = async (req, res, next) => {
     try {
         const userData = req.body;
-
         const userToken = await userService.loginUser(userData);
 
         res.send({
@@ -49,10 +48,6 @@ const updateUserNameController = async (req, res, next) => {
     try {
         const userAuthId = req.userAuth.id;
         const { newName } = req.body;
-
-        console.log(req.body);
-        console.log(userAuthId);
-        console.log(newName);
 
         await userService.updateUserName(userAuthId, newName);
 

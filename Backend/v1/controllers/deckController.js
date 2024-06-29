@@ -4,8 +4,6 @@ const getPlayerDeckController = async (req, res, next) => {
     try {
         const { language } = req.params;
 
-        console.log(language);
-
         const deck = await deckService.getPlayerDeck(language);
 
         res.send({

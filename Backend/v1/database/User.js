@@ -83,8 +83,6 @@ const getUserByEmail = async (email) => {
             , [email]
         );
 
-        console.log(result[0])
-
         return result[0];
     } finally {
         if (connection) connection.release();

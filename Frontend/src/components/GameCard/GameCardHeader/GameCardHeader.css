@@ -13,10 +13,12 @@
     border-top-right-radius: 5px;
 }
 
-h1 {
+.game-card-header h1 {
     font-size: smaller !important;
+    color: black;
 }
 
 .game-card-header strong {
     text-transform: uppercase;
+    color: black;
 }

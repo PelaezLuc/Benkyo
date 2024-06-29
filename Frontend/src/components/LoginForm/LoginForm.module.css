@@ -1,0 +1,100 @@
+.section {
+    height: 74vh;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.title {
+    color: #fff; /* Ajustado para mayor legibilidad contra fondos oscuros */
+    background: #000; /* Simboliza un fondo oscuro */
+    mix-blend-mode: difference; /* Mejora la legibilidad */
+    position: relative;
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.title:before {
+    content: '';
+    display: inline-block; /* Cambiado de block a inline-block */
+    width: 100%; /* Asegura que el pseudo-elemento abarque todo el ancho del contenedor */
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgb(247, 168, 168),
+        rgb(120, 184, 211)
+    );
+    mix-blend-mode: screen; /* Mantiene el efecto de gradiente */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.button {
+    background-image: linear-gradient(
+        to right,
+        #f1a9b2 0%,
+        #bfe9ff 51%,
+        #ff6e7f 100%
+    );
+    margin: 10px;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    border-color: #eaa6a6;
+    display: block;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    border-color: #80b4df;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    background-image: linear-gradient(
+        to right,
+        #f1a9b2 0%,
+        #bfe9ff 51%,
+        #ff6e7f 100%
+    );
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+
+    background-size: 200% auto;
+    color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    border-color: #eaa6a6;
+    display: block;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+span {
+    color: red;
+    font-size: 12px;
+}

@@ -3,6 +3,8 @@ main {
     background: whitesmoke;
     margin-left: 10vw;
     margin-right: 10vw;
+    box-shadow: 18px 18px 20px 0px black;
+    border-bottom-right-radius: 50px;
 }
 
 .card {

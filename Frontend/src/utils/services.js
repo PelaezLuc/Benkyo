@@ -2,7 +2,7 @@ export const getAllCards = async ({ level, language }) => {
     const response = await fetch(
         `${import.meta.env.VITE_REACT_APP_URL_RAIZ}/api/v1/card/level/language`,
         {
-            method: 'POST',
+            method: 'GET',
             body: JSON.stringify({ level, language }),
             headers: {
                 'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ export function GameCard() {
                 console.log(error);
             }
         };
-        fetchCards({ level: 'easy', language: 'JavaScript' });
+        fetchCards({ level: 'junior', language: 'JavaScript' });
     }, []);
 
     useEffect(() => {

@@ -1,0 +1,15 @@
+header {
+    height: 16vh;
+    color: white;
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+header a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: smaller !important;
+    color: white;
+}
